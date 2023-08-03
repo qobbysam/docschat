@@ -62,10 +62,12 @@ psycopg2==2.9.6
 pyasn1==0.5.0
 pyasn1-modules==0.3.0
 pycparser==2.21
+pycryptodome==3.18.0
 pydantic==1.10.12
 PyJWT==2.7.0
 PyMuPDF==1.22.5
 pyOpenSSL==23.2.0
+pypdf2==3.0.1
 python-dateutil==2.8.2
 python-dotenv==1.0.0
 python3-openid==3.2.0
