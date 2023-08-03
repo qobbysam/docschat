@@ -1,5 +1,6 @@
 
 import os 
+from langchain.prompts import ChatPromptTemplate
 
 class DefaultConfig:
     engine=os.environ.get('EMBEDDING_ENGINE')
