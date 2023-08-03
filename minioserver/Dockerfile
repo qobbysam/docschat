@@ -7,6 +7,8 @@ FROM bitnami/minio:latest
 # Set environment variables for MinIO root user and password
 ENV MINIO_ROOT_USER="admin"
 ENV MINIO_ROOT_PASSWORD="password"
+ENV MINIO_VOLUMES="/mnt/data"
+ENV MINIO_SERVER_URL="http://minio.qobbysam.com:9000"
 
 # Expose the default MinIO port
 EXPOSE 9000
