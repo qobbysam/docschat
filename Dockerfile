@@ -1,5 +1,11 @@
+# syntax = docker/dockerfile:1.2
+
+
 # Use the official Python image as the base image
+
 FROM python:3.9
+
+RUN --mount=type=secret,id=_env,dst=/etc/secrets/.env cat /etc/secrets/.env
 
 # Set environment variables for Python
 ENV PYTHONDONTWRITEBYTECODE 1
