@@ -10,6 +10,8 @@ ENV MINIO_ROOT_PASSWORD="password"
 ENV MINIO_VOLUMES="/mnt/data"
 ENV MINIO_SERVER_URL="http://minio.qobbysam.com:9000"
 
+RUN mkdir -p /mnt/data
+
 # Expose the default MinIO port
 EXPOSE 9000
 
