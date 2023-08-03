@@ -1,17 +1,17 @@
-# Use a lightweight Linux base image
-FROM alpine:latest
+# # Use a lightweight Linux base image
+# FROM alpine:latest
 
-# Copy the binary file into the image
-RUN mkdir -p /mnt/data
+# Use the official Bitnami MinIO image as the base image
+FROM bitnami/minio:latest
 
-COPY . /usr/local/bin/
+# Set environment variables for MinIO root user and password
+ENV MINIO_ROOT_USER="admin"
+ENV MINIO_ROOT_PASSWORD="password"
 
-# Set the working directory
-WORKDIR /usr/local/bin
+# Expose the default MinIO port
+EXPOSE 9000
 
-# Make the binary executable (if needed)
-RUN chmod +x minio
+# Define the command to start the MinIO server
+CMD ["minio", "server", "/data"]
 
-EXPOSE 9001
-# Define the command to run your binary (update this according to your binary's execution command)
-CMD ["MINIO_ROOT_USER=admin MINIO_ROOT_PASSWORD=password ./usr/local/bin/minio server /usr/local/bin/mnt/data --console-address ":9001""]
+

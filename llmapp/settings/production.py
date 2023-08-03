@@ -8,9 +8,9 @@ from .base import *
 
 DEBUG = os.environ.get("DEBUG")
 
-ENV_ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS')
+# ENV_ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS')
 
-ALLOWED_HOSTS = ENV_ALLOWED_HOSTS.split(",")
+ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '').split(',')
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
