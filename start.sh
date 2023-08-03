@@ -16,7 +16,7 @@ python manage.py migrate
 python manage.py collectstatic --noinput
 
 # Start Celery worker
-celery -A llmapp worker -l info --concurency=3  &
+celery -A llmapp worker -l info ----concurrency=3  &
 
 # Start Celery beat (if needed)
 # celery -A your_project_name beat -l info --scheduler django_celery_beat.schedulers:DatabaseScheduler &
