@@ -80,11 +80,11 @@ ENV CHAT_MODEL $CHAT_MODEL
 ARG OPENAI_API_KEY 
 ENV OPENAI_API_KEY $OPENAI_API_KEY
 
-# Collect static files
-RUN python manage.py collectstatic --noinput
+# # Collect static files
+# RUN python manage.py collectstatic --noinput
 
-# Run database migrations
-RUN python manage.py migrate
+# # Run database migrations
+# RUN python manage.py migrate
 
 # Expose the port that the Django application will listen on
 EXPOSE 8000
@@ -92,4 +92,6 @@ EXPOSE 8000
 # Define the command to start the Django development server
 #CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
 
-CMD ["bash", "-c", "celery -A llmapp worker -l info & python manage.py runserver 0.0.0.0:8000"]
+COPY start.sh /app/start.sh
+ENTRYPOINT ["/app/start.sh"]
+#CMD ["bash", "-c", "celery -A llmapp worker -l info & python manage.py runserver 0.0.0.0:8000"]
