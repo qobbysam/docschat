@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block head_title %}{% endblock %}
+
+{% block stylesheet %}
+<link type="text/css" href="/static/account/vendor/sweetalert2/dist/sweetalert2.min.css" rel="stylesheet">
+
+<!-- Notyf -->
+<link type="text/css" href="/static/account/vendor/notyf/notyf.min.css" rel="stylesheet">
+
+<!-- Volt CSS -->
+<link type="text/css" href="/static/account/css/volt.css" rel="stylesheet">
+{% endblock %}
+
+
+{% block body %}
+
+    <main>
+
+        <section class="vh-lg-100 mt-lg-5 mt-lg-0 bg-soft d-flex align-items-center">
+          
+            <div class="container">
+            
+                      {% block content %}
+                      {% endblock %}
+                      
+
+                </div>
+        </section>
+
+    </main>
+
+
+
+    {% comment %} <div>
+      {% comment %} <strong>{% trans "Menu:" %}</strong>
+      <ul>
+        {% if user.is_authenticated %}
+        <li><a href="{% url 'account_email' %}">{% trans "Change E-mail" %}</a></li>
+        <li><a href="{% url 'account_logout' %}">{% trans "Sign Out" %}</a></li>
+        {% else %}
+        <li><a href="{% url 'account_login' %}">{% trans "Sign In" %}</a></li>
+        <li><a href="{% url 'account_signup' %}">{% trans "Sign Up" %}</a></li>
+        {% endif %}
+      </ul> 
+
+      
+    </div> {% endcomment %}
+   
+    {% endblock %}
+    {% block extra_body %}
+    {% endblock %}
+
+    {% block scripts %}
+    <!-- Core -->
+    <script src="/static/account/vendor/@popperjs/core/dist/umd/popper.min.js"></script>
+    <script src="/static/account/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
+    
+    <!-- Vendor JS -->
+    <script src="/static/account/vendor/onscreen/dist/on-screen.umd.min.js"></script>
+    
+    <!-- Slider -->
+    <script src="/static/account/vendor/nouislider/distribute/nouislider.min.js"></script>
+    
+    <!-- Smooth scroll -->
+    <script src="/static/account/vendor/smooth-scroll/dist/smooth-scroll.polyfills.min.js"></script>
+    
+    <!-- Charts -->
+    <script src="/static/account/vendor/chartist/dist/chartist.min.js"></script>
+    <script src="/static/account/vendor/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js"></script>
+    
+    <!-- Datepicker -->
+    <script src="/static/account/vendor/vanillajs-datepicker/dist/js/datepicker.min.js"></script>
+    
+    <!-- Sweet Alerts 2 -->
+    <script src="/static/account/vendor/sweetalert2/dist/sweetalert2.all.min.js"></script>
+    
+    <!-- Moment JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
+    
+    <!-- Vanilla JS Datepicker -->
+    <script src="/static/account/vendor/vanillajs-datepicker/dist/js/datepicker.min.js"></script>
+    
+    <!-- Notyf -->
+    <script src="/static/account/vendor/notyf/notyf.min.js"></script>
+    
+    <!-- Simplebar -->
+    <script src="/static/account/vendor/simplebar/dist/simplebar.min.js"></script>
+    
+    <!-- Github buttons -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    
+    <!-- Volt JS -->
+    <script src="/static/account/assets/js/volt.js"></script>
+    
+    {% endblock %}

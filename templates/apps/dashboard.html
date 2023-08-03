@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SIGNL | {{ username }}'s Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
+      integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm"
+      crossorigin="anonymous"
+    />
+    {% load static %}
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'userapp/css/custom.css' %}"
+    />
+  </head>
+  <body class="dashboard-body">
+    <nav>
+      <div class="nav-item">
+        <a href="/" class="logo-link">
+          <div class="logo-container-left">
+            <img class="logo" src="{% static 'images/logotemp.png' %}" alt="Logo" />
+          </div>
+        </a>
+        <div class="nav-pagetxt-left">| My Dashboard</div>
+      </div>  
+      <div class="nav-btn-container">
+        <div class="user-profile">
+          <div class="user-profile-icon skeleton" id="user-icon">
+            <i class="fas fa-user-circle"></i>
+          </div>              
+          <div class="user-profile-username skeleton">
+            <span>{{ username }}</span>
+            <br>
+            <span class="company-name">{{ company_name }}</span>
+          </div>      
+        </div>        
+        <a href="{% url 'account_login' %}" class="navbtn text-btn simple-bordered">Log out</a>
+      </div>
+    </nav>
+    {% if show_banner %}
+    <div class="banner-container">
+      <h2 class="banner-header white">Welcome, {{ username }}!</h2>
+    </div>
+    {% endif %}
+    <div class="dashboard-split-container">
+      <div class="dashboard-split-item">
+        <h3 class="dashboard-header-small">Summary</h3>
+        <hr class="dashboard-line">
+        <div class="dashboard-header-container">
+          <h3 class="dashboard-header">
+            Papers: <span id="unique_paper_count">
+              <span class="loading-spinner"></span>
+            </span>
+          </h3>
+          <h3 class="dashboard-header">
+            Images: <span id="unique_image_count">
+              <span class="loading-spinner"></span>
+            </span>
+          </h3>
+        </div>
+      </div>
+    </div>
+    <div class="dashboard-split-container">
+      <div class="dashboard-split-item skeleton">
+        <h3 class="dashboard-header-small">Database</h3>
+        <hr class="dashboard-line">
+        <p class="dashboard-text skeleton">Upload, view, and effortlessly manage your research papers in our intelligent database. Our system automatically interprets and categorizes them by their key information.</p>
+  
+        <div class="dashboard-button-container">
+          <a href="{% url 'upload' %}">
+            <button class="cirbtn cirbtn-large text-btn skeleton">Upload papers</button>
+          </a>
+          <a href="{% url 'manage' %}">
+            <button class="cirbtn cirbtn-large-hollow text-btn skeleton">Manage papers</button>
+          </a>
+        </div>
+      </div>
+      <div class="dashboard-split-item skeleton">
+        <h3 class="dashboard-header-small skeleton">Write a Report</h3>
+        <hr class="dashboard-line">
+        <p class="dashboard-text skeleton">Automatically generate a detailed scientific review from your uploaded papers. Our advanced algorithm and natural language processing analyze your papers' content to synthesize a comprehensive review highlighting key findings and insights. Seamlessly incorporate relevant images into the generated PDF to enhance the visual representation of your research. Additionally, our AI-powered system automatically generates accurate citations for the sources referenced in your papers, ensuring proper attribution and saving you time. Let us provide you with a high-quality scientific review in no time.</p>
+        <div class="dashboard-button-container">
+          <a href="{% url 'generate' %}">
+            <button class="cirbtn cirbtn-primary text-btn skeleton">Generate scientific review</button>
+          </a>
+          <div class="hatching-overlay">
+            <button class="cirbtn cirbtn-large-hollow text-btn skeleton">My reviews</button>
+          </div>
+          <div class="hatching-overlay">
+            <button class="cirbtn cirbtn-large-hollow text-btn skeleton">Chat with my papers</button>
+          </div>
+        </div>
+      </div> 
+    </div>
+    <div class="page-container">
+    </div>
+  </body>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="{% static 'scripts/hashColor.js' %}"></script>
+  <script src="{% static 'scripts/registrationFuncs.js' %}"></script>
+  <script src="{% static 'scripts/skeletonLoader.js' %}"></script>
+  <script>
+    $(document).ready(function() {
+      // Fetch the graph summary data and update the summary section
+      fetchGraphSummaryAndUpdate();
+    });
+
+    function fetchGraphSummaryAndUpdate() {
+      $.ajax({
+        url: "{% url 'get_graph_summary' %}",
+        dataType: 'json',
+        success: function(data) {
+          // Define the delay for each value in milliseconds
+          var delay = 60;
+
+          // Update the page with the graph summary data
+          updateSummaryValue('#unique_paper_count', data.unique_paper_count, delay);
+          updateSummaryValue('#unique_image_count', data.unique_image_count, delay * 2);
+          updateSummaryValue('#topic_analysis', data.topic_analysis, delay * 3);
+          updateSummaryValue('#keyword_analysis', data.keyword_analysis, delay * 4);
+        }
+      });
+    }
+
+    function updateSummaryValue(elementSelector, value, delay) {
+      setTimeout(function() {
+        $(elementSelector + ' .loading-spinner').remove();
+        $(elementSelector).text(value);
+      }, delay);
+    }
+  </script>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SIGNL | Database</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
+      integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm"
+      crossorigin="anonymous"
+    />
+    {% load static %}
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'css/styles.css' %}"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  </head>
+  <body class="dashboard-body">
+    {% csrf_token %}
+    <nav>
+      <div class="nav-item">
+        <a href="/" class="logo-link">
+          <div class="logo-container-left">
+            <img class="logo" src="{% static 'images/logotemp.png' %}" alt="Logo" />
+          </div>
+        </a>
+        <div class="nav-pagetxt-left"> | Database</div>
+      </div>  
+      <div class="nav-btn-container-centered">
+        <a href="{% url 'dashboard' %}"><button class="navbtn text-btn simple-bordered">Go Back to Dashboard</button></a>
+      </div>
+      <div class="nav-btn-container">
+        <div class="user-profile">
+          <div class="user-profile-icon skeleton" id="user-icon">
+            <i class="fas fa-user-circle"></i>
+          </div>              
+          <div class="user-profile-username skeleton">
+            <span>{{ username }}</span>
+            <br>
+            <span class="company-name">{{ company_name }}</span>
+          </div>      
+        </div>        
+        <a href="{% url 'login' %}" class="navbtn text-btn simple-bordered">Log out</a>
+      </div>
+    </nav>
+    <div class="upload-split-container">
+      <div class="upload-split-item skeleton">
+        <h3 class="dashboard-header-small skeleton">Database</h3>
+        <hr class="dashboard-line">
+        <p class="dashboard-text skeleton">All of your papers</p>
+        <div class="papers-container">
+          {% for paper in papers %}
+          <div class="paper" id="paper-{{ forloop.counter }}">
+            <i class="file-icon far fa-file"></i>
+            <p class="paper-title">{{ paper.name }}</p>
+            <button class="delete-paper-button delete" data-paper-name="{{paper.name}}" data-paper-id="paper-{{ forloop.counter }}">X</button>
+          </div>
+          {% endfor %}
+        </div>        
+        <button id="delete-all-papers-button" class="delete">Delete All</button>
+      </div>
+    </div>
+    <div id="upload-task-container"></div>
+  </body>
+  <script src="{% static 'scripts/hashColor.js' %}"></script>
+  <script src="{% static 'scripts/registrationFuncs.js' %}"></script>
+  <script src="{% static 'scripts/skeletonLoader.js' %}"></script>
+  <script src="{% static 'scripts/manage.js' %}"></script>
+</html>

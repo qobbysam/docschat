@@ -1,0 +1,115 @@
+{% extends "userapp/base.html" %}
+
+{% load static %}
+{% block extrasheet%}
+{%endblock%}
+{% block main %}
+<div class="py-4">
+  
+<div class="row">
+    <div class="col-12 mb-4">
+        </div>
+
+</div>
+<div class="row">
+    
+  <div class="col-12 col-xl-8">
+        
+    <div class="row">
+
+      <div class="col-12 col-xxl-6 mb-4">
+          <div class="card border-0 shadow">
+              <div class="card-header border-bottom d-flex align-items-center justify-content-between">
+                  <h2 class="fs-5 fw-bold mb-0">Generate Report</h2>
+              
+                  <div class="col text-end">
+                    <a href="{% url 'reports' %}"class="btn btn-primary" > All Reports</a>
+                  </div>
+              
+              </div>
+              <div class="card-body">
+                  <div class = "row">
+                    
+                    <div id="generateapp">
+                      {% csrf_token %}
+                    </div>
+
+                    {% comment %} <form id="reportForm" method="post" action="{% url "generate" %}">
+                          {% csrf_token %}
+                        <div id="section1" class="generate-form-container">
+                            {{ form.topic.label_tag }} {{ form.topic }}
+                            <p class="dashboard-text">Enter a topic.</p>
+                        </div>
+                        
+                        <div id="section2" class="generate-form-container">
+                            {{ form.numsections.label_tag }} {{ form.numsections }}
+                            <p class="dashboard-text">
+                              Enter the number of sections to generate.
+                            </p>
+                        </div>
+                          
+                        <div id="section3" class="generate-form-container">
+                            {{ form.layers.label_tag }} {{ form.layers }}
+                            <p class="dashboard-text">
+                              A layer is a complexity score that is assigned to each section
+                              as it is generated.
+                            </p>
+                        </div>
+                        <button
+                            type="button"
+                            id="continueFinal"
+                            class="cirbtn cirbtn-large-hollow text-btn">
+                            Generate Report
+                        </button>
+                        <div id="successMessage" style="display: none">
+                            <p>The report is ready.</p>
+                            <button
+                              type="button"
+                              id="openPdfButton"
+                              style="display: none"
+                              class="cirbtn cirbtn-large-hollow text-btn">
+                              Open PDF
+                            </button>
+                        </div>
+                    </form> {% endcomment %}
+              
+                </div>
+
+            </div>
+          
+          </div>
+      </div>
+      
+    </div>
+    
+  </div>
+
+  <div class="col-12 col-xl-4">
+        <div class="col-12 px-0 mb-4">
+
+        </div>
+        
+  </div>
+</div>
+
+
+
+
+{% endblock %}
+
+
+{% block extra_scripts %}
+<script src="{% static 'scripts/generate.js' %}"></script>
+<script>
+    // Function to toggle the sidebar collapse
+    function toggleSidebar() {
+      const sidebarMenu = document.getElementById('sidebarMenu');
+      sidebarMenu.classList.toggle('collapse');
+    }
+  </script>
+
+
+
+<script src="{% static 'assets/generate.bundle.js' %}"></script>
+
+{% endblock extra_scripts %}

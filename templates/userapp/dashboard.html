@@ -1,0 +1,54 @@
+{% extends "userapp/base.html" %}
+
+{% load static %}
+{% block extrasheet%}
+{%endblock%}
+{% block main %}
+<div class="py-4">
+  
+
+<div class="row">
+    <div class="col-12 col-xl-8">
+        <div class="row">
+            <div class="col-12 mb-4">
+                <div class="card border-0 shadow">
+                    <div class="card-header">
+                        <div class="row align-items-center">
+                            <div class="col">
+
+                            </div>
+                            <div class="col text-end">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+
+                    </div>
+                </div>
+            </div>
+    </div>
+</div>
+
+</div>
+ 
+
+
+
+
+
+{% endblock %}
+
+
+{% block extra_scripts %}
+<script>
+    // Function to toggle the sidebar collapse
+    function toggleSidebar() {
+      const sidebarMenu = document.getElementById('sidebarMenu');
+      sidebarMenu.classList.toggle('collapse');
+    }
+  </script>
+
+                        
+
+{% endblock extra_scripts %}

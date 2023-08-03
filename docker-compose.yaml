@@ -1,0 +1,26 @@
+version: "3"
+
+services:
+  # Django web application service
+  web:
+    build: .
+    container_name: llmapp
+    command: python manage.py runserver 0.0.0.0:8000  # Replace this with your Django runserver command
+    volumes:
+      - .:/app  # Mount the project directory to the container's /app directory
+    ports:
+      - "8000:8000"  # Expose the web application on port 8000
+
+  # Celery worker service
+  celery_worker:
+    build: .
+    container_name: llmapp-worker
+    command: celery -A llmapp worker --loglevel=info  # Replace with your Celery worker command
+    volumes:
+      - .:/app  # Mount the project directory to the container's /app directory
+
+  # Database service (assuming you use PostgreSQL)
+
+
+volumes:
+  pg_data:  # Define a named volume for PostgreSQL data persistence

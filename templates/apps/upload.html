@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SIGNL | Upload</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
+      integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm"
+      crossorigin="anonymous"
+    />
+    {% load static %}
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'css/styles.css' %}"
+    />
+  </head>
+  <body class="dashboard-body">
+    <nav>
+      <div class="nav-item">
+        <a href="/" class="logo-link">
+          <div class="logo-container-left">
+            <img class="logo" src="{% static 'images/logotemp.png' %}" alt="Logo" />
+          </div>
+        </a>
+        <div class="nav-pagetxt-left"> | Upload</div>
+      </div>  
+      <div class="nav-btn-container-centered">
+        <a href="{% url 'dashboard' %}"><button class="navbtn text-btn simple-bordered">Go Back to Dashboard</button></a>
+      </div>
+      <div class="nav-btn-container">
+        <div class="user-profile">
+          <div class="user-profile-icon skeleton" id="user-icon">
+            <i class="fas fa-user-circle"></i>
+          </div>              
+          <div class="user-profile-username skeleton">
+            <span>{{ username }}</span>
+            <br>
+            <span class="company-name">{{ company_name }}</span>
+          </div>      
+        </div>        
+        <a href="{% url 'login' %}" class="navbtn text-btn simple-bordered">Log out</a>
+      </div>
+    </nav>
+    <div class="upload-split-container">
+      <div class="upload-split-item skeleton">
+        <h3 class="dashboard-header-small skeleton">Upload Files to Database</h3>
+        <hr class="dashboard-line">
+        <p class="dashboard-text skeleton">Only research papers as PDFs are accepted as of now</p>
+        <div class="upload-container simple-bordered">
+          <form id="fileUploadForm" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="navbtn text-btn simple-bordered">
+              <label for="fileInput" id="fileInputText">Choose Files</label>
+              <input type="file" id="fileInput" name="file" multiple>
+            </div>
+            <span id="fileLabelText">No file chosen</span>
+            <input type="submit" value="Upload" class="cirbtn cirbtn-large text-btn skeleton"></input>
+          </form>
+        </div>
+        <div id="drag-drop-area" class="drag-drop-area">
+          <p>Drag and drop files here</p>
+        </div>      
+      </div>
+    </div>
+    <template id="upload-box-template">
+      <div class="upload-split-item">
+          <h3 class="dashboard-header-small">Upload Task</h3>
+          <div class="lefttext-container">
+              <p class="dashboard-text-slim">Please wait while your files upload.</p>
+          </div>
+          <div class="progress-bar">
+              <div class="progress"></div>
+          </div>
+          <div class="file-list"></div>
+      </div>
+    </template>
+    <div id="upload-task-container"></div>
+  </body>
+  <script src="{% static 'scripts/hashColor.js' %}"></script>
+  <script src="{% static 'scripts/registrationFuncs.js' %}"></script>
+  <script src="{% static 'scripts/skeletonLoader.js' %}"></script>
+  <script src="{% static 'scripts/upload.js' %}"></script>
+</html>

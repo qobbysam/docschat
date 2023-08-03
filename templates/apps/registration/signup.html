@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign up</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
+      integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm"
+      crossorigin="anonymous"
+    />
+    {% load static %}
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% static 'css/styles.css' %}"
+    />
+  </head>
+  <body class="registration-body">
+    <nav>
+      <div class="nav-item">
+        <a href="/" class="logo-link">
+          <div class="logo-container-left">
+            <img class="logo" src="{% static 'images/logotemp.png' %}" alt="Logo" />
+          </div>
+        </a>
+        <div class="nav-pagetxt-left">| Sign up</div>
+      </div>
+    </nav>
+    <div class="page-container">
+      <div class="registration-image"></div>
+      <div class="registration-form-container">
+        <form class="registration-form" method="post">
+          <h2 class="registration-header centered-item">Create your account</h2>
+          {% csrf_token %}
+          {% for field in form %}
+            <div class="registration-form-group">
+              <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+              {% if field.label == "Key" %}
+                <input
+                  type="text"
+                  id="{{ field.id_for_label }}"
+                  name="{{ field.html_name }}"
+                  class="input-small skeleton"
+                  placeholder="Your Company Key"
+                />
+              {% elif field.label == "Password" %}
+                <div class="password-input-container">
+                  <input
+                    type="password"
+                    id="{{ field.id_for_label }}"
+                    name="{{ field.html_name }}"
+                    placeholder="{{ field.label }}"
+                    class="skeleton"
+                  />
+                </div>
+              {% else %}
+                <input
+                  type="{{ field.field.widget.input_type }}"
+                  id="{{ field.id_for_label }}"
+                  name="{{ field.html_name }}"
+                  class="skeleton"
+                  placeholder="{{ field.label }}"
+                />
+              {% endif %}
+              {% if field.errors %}
+                <div class="error">
+                  {% for error in field.errors %}
+                    {{ error }}
+                  {% endfor %}
+                </div>
+              {% endif %}
+            </div>
+          {% endfor %}
+          <button
+            class="cirbtn cirbtn-large-wide text-btn centered-item skeleton"
+            type="submit"
+          >
+            Create account
+          </button>
+          <div class="centered-item">
+            <div class="registration-caption">Already have an account? <u><strong><a href="{% url 'login' %}" class="registration-caption">Login</a></strong></u></div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <script src="{% static 'scripts/registrationFuncs.js' %}"></script>
+    <script src="{% static 'scripts/skeletonLoader.js' %}"></script>
+  </body>
+</html>

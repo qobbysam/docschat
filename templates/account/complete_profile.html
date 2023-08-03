@@ -1,0 +1,18 @@
+
+{% extends 'account/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+
+   <div class="text-center text-md-center mb-4 mt-md-0">
+
+      <h2>Complete Profile</h2>
+      </div>
+      <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form | crispy }}
+        <button  class="btn btn-lg btn-gray-800 " type="submit">Complete Profile</button>
+      </form>
+    {% endblock %}   
+
+

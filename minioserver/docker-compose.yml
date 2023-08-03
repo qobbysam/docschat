@@ -1,0 +1,7 @@
+version: "3"
+
+services:
+  minioserver:
+    build: .  # Build the Docker image using the current directory's Dockerfile
+    container_name: minioserver  
+    restart: unless-stopped  # Restart the container unless explicitly stopped

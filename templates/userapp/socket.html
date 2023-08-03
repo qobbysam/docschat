@@ -1,0 +1,189 @@
+{% extends "userapp/base.html" %}
+
+{% load static %}
+{% block extrasheet%}
+{%endblock%}
+{% block main %}
+<div class="py-4">
+  
+<div class="row">
+    <div class="col-12 mb-4">
+        </div>
+
+</div>
+<div class="row">
+    <div class="col-12 col-xl-8">
+        <div class="row">
+            <div class="col-12 mb-4">
+                <div class="card border-0 shadow">
+                    <div class="card-header">
+                        <div class="row align-items-center">
+                            <div class="col">
+                                <h2 class="fs-5 fw-bold mb-0">DataBase</h2>
+                            </div>
+                            <div class="col text-end">
+                                <button type="button" class="btn btn-info"
+                                            data-bs-toggle="tooltip" data-bs-placement="top"
+                                            data-bs-custom-class="custom-tooltip"
+                                            data-bs-title="Upload, view, and effortlessly manage your research papers in our intelligent database. Our system automatically interprets and categorizes them by their key information.">
+                                            <svg class="icon icon-xs me-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"></path></svg>
+
+                                            Info
+                                        </button>
+                                <a href="#" class="btn btn-sm btn-primary">Manage Papers</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <p class="dashboard-text skeleton"></p>
+  
+                        <div class="dashboard-button-container">
+                          {% comment %} <a href="{% url 'upload' %}"> 
+                            <button class="cirbtn cirbtn-large text-btn skeleton">Upload papers</button>
+                          </a>{% endcomment %}
+                            <div id="uploadapp">
+                                {% csrf_token %} 
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-xxl-6 mb-4">
+                <div class="card border-0 shadow">
+                    <div class="card-body">
+                        <div id="generateapp">
+                            {% csrf_token %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-xxl-6 mb-4">
+                <div class="card border-0 shadow">
+                    <div class="card-header border-bottom d-flex align-items-center justify-content-between">
+                       <h2 class="fs-5 fw-bold mb-0">Write Report</h2>
+                       <div class="col text-end">
+                        <button type="button" class="btn btn-info" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Automatically generate a detailed scientific review from your uploaded papers. Our advanced algorithm and natural language processing analyze your papers' content to synthesize a comprehensive review highlighting key findings and insights. Seamlessly incorporate relevant images into the generated PDF to enhance the visual representation of your research. Additionally, our AI-powered system automatically generates accurate citations for the sources referenced in your papers, ensuring proper attribution and saving you time. Let us provide you with a high-quality scientific review in no time.">
+                            <svg class="icon icon-xs me-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"></path></svg>
+
+                            info
+                          </button>
+                        <a href="#" class="btn btn-sm btn-primary">My Reviews</a>
+                        
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        
+                        <p class="dashboard-text skeleton"></p>
+
+                        <div class="row justify-content-center relative">
+                        <p id="room-name">ID: {{company_id}}</p>
+                        <textarea id="chat-log" cols="100" rows="20"></textarea><br>
+                        <input id="chat-message-input" type="text" size="100"><br>
+                        <input id="chat-message-submit" type="button" value="Send">
+                        </div>
+                        <div class="d-flex justify-content-between dashboard-button-container">
+                          <a href="{% url 'generate' %}">
+                            <button class="btn btn-primary text-btn skeleton">Generate scientific review</button>
+                          </a>
+
+                          <div class="hatching-overlay">
+                            <button class="btn  btn-success text-btn skeleton">
+                                Chat with my papers</button>
+                          </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+           </div>
+    </div>
+    <div class="col-12 col-xl-4">
+        <div class="col-12 px-0 mb-4">
+            <div class="card border-0 shadow">
+                <div class="card-header d-flex flex-row align-items-center flex-0 border-bottom">
+                    <div class="d-block">
+                        <div class="h3 fw-extrabold text-gray mb-2">Summary</div>
+                        <h2 class="h6 fw-bold">Papers: </h2>
+                        <h2 class="h6 fw-bold">Images: </h2>
+           
+                    </div>
+
+                </div>
+                <div class="card-body p-2">
+                </div>
+            </div>
+        </div>
+        
+         </div>
+    </div>
+</div>
+
+
+
+{% endblock %}
+
+
+{% block extra_scripts %}
+<script>
+    // Function to toggle the sidebar collapse
+    function toggleSidebar() {
+      const sidebarMenu = document.getElementById('sidebarMenu');
+      sidebarMenu.classList.toggle('collapse');
+    }
+  </script>
+
+                        
+  <script>
+    //const roomName = JSON.parse(document.getElementById('room-name').textContent);
+    const roomName = {{company_id}}
+    const wsscheme = window.location.protocol == "https:" ? "wss" :"ws";
+    const chatSocket = new WebSocket(
+        wsscheme+
+        '://'
+        + window.location.host
+        + '/ws/socket/'
+        + roomName
+        + '/'
+    );
+
+    chatSocket.onconnect = function(e){
+        console.log("connected")
+    }
+    chatSocket.onmessage = function(e) {
+        const data = JSON.parse(e.data);
+        console.log(data)
+        document.querySelector('#chat-log').value += (data.message + '\n');
+    };
+
+    chatSocket.onclose = function(e) {
+        console.error('Chat socket closed unexpectedly');
+    };
+
+    chatSocket.onerror = function(e){
+        console.error(e)
+    }
+
+    document.querySelector('#chat-message-input').focus();
+    document.querySelector('#chat-message-input').onkeyup = function(e) {
+        if (e.keyCode === 13) {  // enter, return
+            document.querySelector('#chat-message-submit').click();
+        }
+    };
+
+    document.querySelector('#chat-message-submit').onclick = function(e) {
+        const messageInputDom = document.querySelector('#chat-message-input');
+        const message = messageInputDom.value;
+        chatSocket.send(JSON.stringify({
+            'type': 'chat_message',
+            'message': message
+        }));
+        messageInputDom.value = '';
+    };
+</script>
+
+
+<script src="{% static 'assets/upload.bundle.js' %}"></script>
+<script src="{% static 'assets/generate.bundle.js' %}"></script>
+
+{% endblock extra_scripts %}

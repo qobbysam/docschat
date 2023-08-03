@@ -1,0 +1,47 @@
+{% extends 'bootstrap5.html' %}
+
+{% load static %}
+{% load bootstrap5 %}
+
+{% load config_env_tag %}
+
+{% block bootstrap5_title %}
+{% block title %}{% endblock %}
+{% endblock %}
+
+
+
+{% bootstrap_css %}
+
+
+
+
+{% block bootstrap5_extra_head %}
+{% block stylesheet %} {% endblock %}
+
+{% block extrameta %} {% endblock %} 
+
+
+{% endblock %}
+
+{% block bootstrap5_content %} 
+
+{% block body %} {% endblock %}
+
+{% endblock %}
+
+
+{% block bootstrap5_extra_script %}
+{%load_config_vars%}
+
+{% block scripts %} {% endblock %}
+
+{% block extra_scripts %}
+
+{% endblock extra_scripts %}
+
+{% endblock %}
+
+
+        
+

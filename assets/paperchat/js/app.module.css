@@ -1,0 +1,34 @@
+.animationContainer {
+    /* Define styles for the animation container */
+  }
+  
+  .minimized {
+    /* Define styles for the minimized animation container */
+  }
+  
+  .minimizeButton {
+    /* Define styles for the minimize button */
+  }
+  
+  .statusIcon {
+    /* Define styles for the status icon */
+  }
+  
+  .processingAnimation {
+    /* Define styles for the processing animation */
+  }
+  
+  .spinner {
+    animation: rotate 1s linear infinite;
+  } 
+  
+  @keyframes rotate {
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  
+   .fileName {
+    /* Define styles for the file name */
+  } 
+  
