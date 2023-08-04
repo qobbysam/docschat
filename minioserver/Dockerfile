@@ -2,13 +2,13 @@
 # FROM alpine:latest
 
 # Use the official Bitnami MinIO image as the base image
-FROM bitnami/minio:latest
+FROM minio/minio:latest
 
 # Set environment variables for MinIO root user and password
 ENV MINIO_ROOT_USER="admin"
 ENV MINIO_ROOT_PASSWORD="password"
 #ENV MINIO_VOLUMES="/mnt/data"
-ENV MINIO_SERVER_URL="http://minio.qobbysam.com:9000"
+ENV MINIO_SERVER_URL="http://minio.qobbysam.com"
 
 #RUN mkdir -p /mnt/data
 
@@ -16,6 +16,6 @@ ENV MINIO_SERVER_URL="http://minio.qobbysam.com:9000"
 EXPOSE 9000
 
 # Define the command to start the MinIO server
-CMD ["minio", "server", "/data"]
+CMD ["minio", "server",  "--console-address :9001" ,"/data"]
 
 
