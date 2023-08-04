@@ -14,14 +14,14 @@ from .processor import ChatProcessor
 logger = getLogger(__name__)
 
 @shared_task
-def process_chat_transaction(prompt_id,user_id,company_id):
+def process_chat_transaction(prompt_id,user_id,company_id, chat_type):
     try:
         
         chat_transaction = ChatTransaction.objects.get(id=prompt_id)
         user_profile = UserProfile.objects.get(user__id=user_id)
 
         logger.info(user_profile)
-        processor = ChatProcessor(userprofile=user_profile,transaction=chat_transaction)
+        processor = ChatProcessor(userprofile=user_profile,transaction=chat_transaction,chat_type=chat_type)
 
         logger.info("starting consumption")
         response = processor.processchat()

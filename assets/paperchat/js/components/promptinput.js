@@ -17,7 +17,7 @@ const availablemodes = [{
 
 
 
-const PromptInput = ({ session, handlePrompt }) => {
+const PromptInput = ({ session, handlePrompt, chatstate }) => {
 
     const [selectedMode, setSelectedMode] = useState('2');
 
@@ -80,12 +80,12 @@ const PromptInput = ({ session, handlePrompt }) => {
                     </div>
                     {selectedMode === "1" && (
                         <>
-                            <FreePromptBuilder session={session} handlePrompt={handlePrompt} />
+                            <FreePromptBuilder session={session} handlePrompt={handlePrompt} chatstate={chatstate} />
                         </>
                     )}
                     {selectedMode === "2" && (
                         <>
-                            <PaperPrompt session={session} handlePaperPrompt={handlePaperPrompt} />
+                            <PaperPrompt session={session} handlePaperPrompt={handlePaperPrompt} chatstate={chatstate}/>
                         </>
                     )}
                     {/* <div className="pos-r">

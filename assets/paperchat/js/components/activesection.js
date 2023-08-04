@@ -5,7 +5,7 @@ import { socket } from "../websocket";
 import React, { useEffect, useState } from "react";
 
 
-const ActiveSection = ({ currentsession, refreshPast, handleSessionChangeNoRefresh, handleRefresh, handleSidebar }) => {
+const ActiveSection = ({ currentsession, refreshPast, handleSessionChangeNoRefresh, handleRefresh, handleSidebar , chatstate}) => {
 
     const [currentPrompt, setCurrentPrompt] = useState({})
     const [locRefresh, setLocRefresh] = useState(false)
@@ -84,8 +84,11 @@ const ActiveSection = ({ currentsession, refreshPast, handleSessionChangeNoRefre
                                 <i className="fsz-sm lh-1">Typing...</i>
                             </div>
                         </div>
-                        {/* <div className="peers">
-                            <a className="peer td-n c-grey-900 cH-blue-500 fsz-md mR-30" title="">
+                        <div className="peers">
+                            <div className="peer">
+                                <h6> Chatting with {chatstate.name} mode</h6>
+                            </div>
+                            {/* <a className="peer td-n c-grey-900 cH-blue-500 fsz-md mR-30" title="">
                                 <i className="ti-video-camera"></i>
                             </a>
                             <a href="" className="peer td-n c-grey-900 cH-blue-500 fsz-md mR-30" title="">
@@ -93,8 +96,8 @@ const ActiveSection = ({ currentsession, refreshPast, handleSessionChangeNoRefre
                             </a>
                             <a href="" className="peer td-n c-grey-900 cH-blue-500 fsz-md" title="">
                                 <i className="ti-more"></i>
-                            </a>
-                        </div> */}
+                            </a> */}
+                        </div>
                     </div>
                 </div>
 
@@ -148,7 +151,7 @@ const ActiveSection = ({ currentsession, refreshPast, handleSessionChangeNoRefre
                         </div> */}
                     </div>
                 </div>
-                <PromptInput session={currentsession} handlePrompt={handlePrompt} />
+                <PromptInput session={currentsession} handlePrompt={handlePrompt}  chatstate={chatstate}/>
 
                     
                 {/* <div className="layer w-100">

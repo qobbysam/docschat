@@ -20,7 +20,68 @@ class PDFFileConsumer:
     
 
     def process_pdf(self):
+        report = {}
+        try:
 
+            if self.pdf_model.pdf_type == "SCIENCE":
+                self.process_science_paper()
+
+            elif self.pdf_model.pdf_type == "LAW":
+                self.process_law_paper()
+
+            else:
+                self.process_other_paper()
+            
+            report["status"] = "complete"
+            report["message"] = "completed consuming"
+            return  report
+        except Exception as e:
+            report["status"] = "failed"
+            report["message"] = f"{e}"
+            return report
+        # try: 
+            
+        #     with self.pdf_model.file.open(mode='rb') as pdf_file:
+                
+        #         #pdf_content = pdf_file.read()
+        #         #fitz_pdf = fitz.open(stream=pdf_content, filetype="pdf")
+        #         pdf = PdfReader(pdf_file)
+        #         #first_page_text = fitz_pdf.load_page(0).get_text("text")
+        #         first_page_text = pdf.pages[0].extract_text()
+        #         title, keywords = self.llmtool.get_title_keywords(page_text=first_page_text)
+
+        #         if title:
+        #             title = title
+                
+        #         else:
+        #             title = "could not determine title with llm"
+
+        #         self.pdf_model.title = title
+        #         self.pdf_model.keywords = keywords
+        #         self.pdf_model.save()
+
+        #         for page_num, page in enumerate(pdf.pages, 1):
+
+        #             #text = page.get_text().encode("utf8")
+        #             text = page.extract_text()
+
+        #             if text:
+
+        #                 self.save_text(text=text, page_num=page_num, keywords=keywords)
+
+        #         report = {"status": "complete", "message": "pass"}
+                
+        #         return report
+
+
+        # except Exception as e:
+        #     report = {"status": "complete", "message": "fail"}
+        #     logger.error(f"error processing {self.pdf_model},  because: {e}")
+             
+        #     return report
+        
+
+    def process_other_paper(self):
         try: 
             
             with self.pdf_model.file.open(mode='rb') as pdf_file:
@@ -61,6 +122,89 @@ class PDFFileConsumer:
             logger.error(f"error processing {self.pdf_model},  because: {e}")
              
             return report
+    def process_science_paper(self):
+        try: 
+            
+            with self.pdf_model.file.open(mode='rb') as pdf_file:
+                
+                #pdf_content = pdf_file.read()
+                #fitz_pdf = fitz.open(stream=pdf_content, filetype="pdf")
+                pdf = PdfReader(pdf_file)
+                #first_page_text = fitz_pdf.load_page(0).get_text("text")
+                first_page_text = pdf.pages[0].extract_text()
+                title, keywords = self.llmtool.get_title_keywords(page_text=first_page_text)
+
+                if title:
+                    title = title
+                
+                else:
+                    title = "could not determine title with llm"
+
+                self.pdf_model.title = title
+                self.pdf_model.keywords = keywords
+                self.pdf_model.save()
+
+                for page_num, page in enumerate(pdf.pages, 1):
+
+                    #text = page.get_text().encode("utf8")
+                    text = page.extract_text()
+
+                    if text:
+
+                        self.save_text(text=text, page_num=page_num, keywords=keywords)
+
+                report = {"status": "complete", "message": "pass"}
+                
+                return report
+
+
+        except Exception as e:
+            report = {"status": "complete", "message": "fail"}
+            logger.error(f"error processing {self.pdf_model},  because: {e}")
+             
+            return report
+
+    def process_law_paper(self):
+        try: 
+            
+            with self.pdf_model.file.open(mode='rb') as pdf_file:
+                
+                #pdf_content = pdf_file.read()
+                #fitz_pdf = fitz.open(stream=pdf_content, filetype="pdf")
+                pdf = PdfReader(pdf_file)
+                #first_page_text = fitz_pdf.load_page(0).get_text("text")
+                first_page_text = pdf.pages[0].extract_text()
+                title, keywords = self.llmtool.get_title_keywords(page_text=first_page_text)
+
+                if title:
+                    title = title
+                
+                else:
+                    title = "could not determine title with llm"
+
+                self.pdf_model.title = title
+                self.pdf_model.keywords = keywords
+                self.pdf_model.save()
+
+                for page_num, page in enumerate(pdf.pages, 1):
+
+                    #text = page.get_text().encode("utf8")
+                    text = page.extract_text()
+
+                    if text:
+
+                        self.save_text(text=text, page_num=page_num, keywords=keywords)
+
+                report = {"status": "complete", "message": "pass"}
+                
+                return report
+
+
+        except Exception as e:
+            report = {"status": "complete", "message": "fail"}
+            logger.error(f"error processing {self.pdf_model},  because: {e}")
+             
+            return report 
 
     def process_images(self, fitz_pdf, fitz_page):
         image_list = fitz_page.get_images()

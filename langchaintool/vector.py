@@ -32,7 +32,7 @@ class DjangoVectorStore(VectorStore):
         embedding_function: Callable,
         search_in: List = None,
         strategy: Optional(str) = "cosine",
-        mode: str = "general",
+        mode: str = "GENERAL",
         **kwargs: Any,
     ):
         """Initialize with necessary components."""
@@ -94,8 +94,16 @@ class DjangoVectorStore(VectorStore):
 
     def get_queryset(self, embedding):
 
-        base = PDFChunk.objects.filter(pdf__company__id=self.userprofile.company.id)
+        pre_base = PDFChunk.objects.filter(pdf__company__id=self.userprofile.company.id)
 
+        if self.mode == "LAW":
+            base = pre_base.filter(pdf__pdf_type="LAW") 
+
+        if self.mode == "SCIENCE":
+            base = pre_base.filter(pdf__pdf_type="SCIENCE") 
+
+        else:
+            base = pre_base
         if self.search_in is not None:
             print(self.search_in)
             print(type(self.search_in))

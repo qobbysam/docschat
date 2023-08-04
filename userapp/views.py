@@ -20,9 +20,12 @@ class GeneralChatView(TemplateView):
 
 class ScienceChatView(TemplateView):
 
-    template_name = "userapp/chat.html"
+    template_name = "userapp/chat_science.html"
 
+class LawChatView(TemplateView):
 
+    template_name = "userapp/chat_law.html"
+    
 class ReportsView(TemplateView):
 
     template_name = "userapp/reports.html"

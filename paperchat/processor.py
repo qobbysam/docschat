@@ -11,10 +11,11 @@ from pdfpaper.models import PDFFile
 logger = getLogger(__name__)
 
 class ChatProcessor:
-     def __init__(self, userprofile, transaction) -> None:
+     def __init__(self, userprofile, transaction,chat_type) -> None:
           self.transaction = transaction
           self.client = PaperSuperClient()
           self.userprofile = userprofile
+          self.chat_type = chat_type
          
     
      def processchat(self):
@@ -22,7 +23,7 @@ class ChatProcessor:
           history = self.get_history()
           
           if self.transaction.mode == "free":
-               response = self.get_response(history)
+               response = self.get_response(history=history,chat_type=self.chat_type)
                #self.update_session_summary(response)
 
           elif self.transaction.mode == "paper":
@@ -30,7 +31,7 @@ class ChatProcessor:
                logger.info("starting paper")
                search_in = self.get_vector_search_in()
                
-               response = self.get_response( history=history, only=search_in)
+               response = self.get_response( history=history, only=search_in, chat_type=self.chat_type)
 
                #self.update_session_summary(response)               
           else:
@@ -58,12 +59,13 @@ class ChatProcessor:
 
 
      
-     def get_response(self, history, only=None):
+     def get_response(self, history, chat_type,only=None):
           
           client_response = self.client.send_message(
                userprofile=self.userprofile, 
                transaction=self.transaction,
-               history=history, only=only
+               history=history, only=only,
+               chat_type = chat_type
                )
           
           response = self.process_client_response(client_response)

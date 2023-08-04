@@ -101,7 +101,8 @@ const PaperPromptBuilder = ({ session, handlePaperPrompt, selectedElements, cans
             prompt: formData.textInput,
             session: session.id,
             mode: "paper",
-            selected: selectedElements
+            selected: selectedElements,
+            extra: {chattype: chatstate.name}
         }
         console.log(promptData)
         try {
@@ -162,7 +163,7 @@ const SelectedLoader = ({ session }) => {
     )
 
 }
-const PaperPrompt = ({ session, handlePaperPrompt }) => {
+const PaperPrompt = ({ session, handlePaperPrompt, chatstate }) => {
 
     const [dataElements, setDataElement] = useState([]);
     const [loading, setLoading] = useState(false);

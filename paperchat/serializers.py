@@ -45,7 +45,6 @@ class SelectedListSerializer(serializers.ListSerializer):
     child = SelectedSerializer()
 
 
-
 class UnknownKeyValueField(serializers.Field):
     """
     Custom serializer field for handling a list of unknown key-value pairs.
@@ -78,6 +77,7 @@ class UnknownKeyValueField(serializers.Field):
             else:
                 result.append({'key': key, 'value': value})
         return result
+
     
 class ChatPromptSerializer(serializers.Serializer):
 

@@ -47,13 +47,15 @@ class PaperSuperClient():
 
         
 
-    def send_message(self, userprofile, transaction, history: List[Any], only: [List] = None):
+    def send_message(self, userprofile, transaction, history: List[Any], chat_type,only: [List] = None):
 
         response = self._send_message(
             userprofile=userprofile,
             transaction=transaction,
             history=history, 
-            only=only)
+            only=only,
+            chat_type = chat_type
+            )
 
         return response
     
@@ -97,17 +99,121 @@ class PaperSuperClient():
             userprofile=userprofile,
             transaction=transaction,
             # memory=memory
+        )
+
+    def make_chain_dj_law(self,userprofile, transaction,mode="LAW", only=None, strategy="cosine" ):
+
+        llm = ChatOpenAI(
+            temperature=0, 
+            model_name=self.config.model_name, 
+            openai_api_key=self.config.api_key, 
+            verbose=True)
+
+        embedding_func = OpenAIEmbeddings(openai_api_key=self.config.api_key, model="text-embedding-ada-002")
+        
+        vectorstore = DjangoVectorStore(
+            userprofile=userprofile,
+            transaction=transaction,
+            embedding_function=embedding_func,
+            search_in =only,
+            strategy=strategy, 
+            mode=mode)
+
+        memory = ConversationBufferMemory(memory_key="chat_history")
+
+        condese_prompt = PromptTemplate.from_template (self.templates["condense_prompt"])
+
+        qa_prompt = PromptTemplate.from_template(self.templates["qa_prompt"])
+
+        question_generator = LLMChain(memory=memory,llm=llm, prompt=condese_prompt)
+
+        do_chain = load_qa_chain(llm=llm, chain_type="stuff", prompt=qa_prompt)
+
+        return ChatDjangoDBChain(
+            vectorstore= vectorstore,
+            mode=mode,
+            combine_docs_chain=do_chain,
+            question_generator=question_generator,
+            return_source_documents=True,
+            top_k_docs_for_context=4,
+            userprofile=userprofile,
+            transaction=transaction,
+            # memory=memory
+        )
+    def make_chain_dj_science(self,userprofile, transaction,mode="SCIENCE", only=None, strategy="cosine" ):
+
+        llm = ChatOpenAI(
+            temperature=0, 
+            model_name=self.config.model_name, 
+            openai_api_key=self.config.api_key, 
+            verbose=True)
+
+        embedding_func = OpenAIEmbeddings(openai_api_key=self.config.api_key, model="text-embedding-ada-002")
+        
+        vectorstore = DjangoVectorStore(
+            userprofile=userprofile,
+            transaction=transaction,
+            embedding_function=embedding_func,
+            search_in =only,
+            strategy=strategy, 
+            mode=mode)
+
+        memory = ConversationBufferMemory(memory_key="chat_history")
+
+        condese_prompt = PromptTemplate.from_template (self.templates["condense_prompt"])
+
+        qa_prompt = PromptTemplate.from_template(self.templates["qa_prompt"])
+
+        question_generator = LLMChain(memory=memory,llm=llm, prompt=condese_prompt)
+
+        do_chain = load_qa_chain(llm=llm, chain_type="stuff", prompt=qa_prompt)
+
+        return ChatDjangoDBChain(
+            vectorstore= vectorstore,
+            mode=mode,
+            combine_docs_chain=do_chain,
+            question_generator=question_generator,
+            return_source_documents=True,
+            top_k_docs_for_context=4,
+            userprofile=userprofile,
+            transaction=transaction,
+            # memory=memory
         )      
     
-    def _send_message(self,userprofile,transaction,history:List[Any], only: List[Any]=None, mode: str="general"):
+    def _send_message(self,userprofile,transaction,history:List[Any], only: List[Any]=None, mode: str="general", chat_type:str = "GENERAL"):
         
-        print({"history": history, "human_input": transaction.prompt })    
+        print({"history": history, "human_input": transaction.prompt })
 
-        chain = self.make_chain_dj(
-            userprofile=userprofile, 
-            mode=mode,
-            transaction=transaction,
-            only=only)
+
+        if chat_type == "GENERAL":
+
+
+            chain = self.make_chain_dj(
+                userprofile=userprofile, 
+                mode=chat_type,
+                transaction=transaction,
+                only=only)
+        elif chat_type == "SCIENCE":
+            chain = self.make_chain_dj_science(
+                userprofile=userprofile, 
+                mode=chat_type,
+                transaction=transaction,
+                only=only)
+            
+        elif chat_type == "LAW":
+            chain = self.make_chain_dj_law(
+                userprofile=userprofile, 
+                mode=chat_type,
+                transaction=transaction,
+                only=only)
+            
+        else:
+
+            chain = self.make_chain_dj(
+                userprofile=userprofile, 
+                mode=chat_type,
+                transaction=transaction,
+                only=only)
         #sanitized_question = sanitize_sentence(transaction.prompt)
         response = {}
         try:

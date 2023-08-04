@@ -79,12 +79,22 @@ class SuperSendPrompt(APIView):
 
             session.mode = serializer.validated_data.get('mode')
             session.selected = selected
-
-            if extra is not None:
-                memory = extra.get("memory", None)
             
-                if memory :
-                    session.memory = memory
+            chat_type = ""
+            if extra is not None:
+                for item in extra:
+                    if item["key"] == "memory":
+                        session.memory = item["value"]
+                    if item["key"] == "chattype":
+                        chat_type = item["value"]
+                # print(extra)
+                # memory = extra.get("memory", None)
+            
+                # if memory :
+                #     session.memory = memory
+                
+                # chat_type = extra.get("chattype", "GENERAL")
+
                 
             session.save()
             response_serializer = ChatTransactionSerializer(transaction)
@@ -92,7 +102,8 @@ class SuperSendPrompt(APIView):
             process_chat_transaction.delay(
                 prompt_id= transaction.id,
                 user_id = request.user.id,
-                company_id = userprofile.company.id
+                company_id = userprofile.company.id,
+                chat_type = chat_type
             )
             session.update_used()
 

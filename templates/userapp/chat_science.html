@@ -1,0 +1,37 @@
+{% extends "userapp/base.html" %}
+
+{% load static %}
+{% block extrasheet%}
+{%endblock%}
+{% block main %}
+
+<div id="paperchatapp">
+    {% csrf_token %}
+</div>
+
+
+
+
+
+{% endblock %}
+
+
+{% block extra_scripts %}
+<script>
+    // Function to toggle the sidebar collapse
+    function toggleSidebar() {
+      const sidebarMenu = document.getElementById('sidebarMenu');
+      sidebarMenu.classList.toggle('collapse');
+    }
+  </script>
+
+  <script>
+
+    const ConfigTemplateVars = "2"
+    window.ConfigTemplateVars = ConfigTemplateVars
+  </script>             
+  
+
+<script  src="{% static 'assets/paperchat.bundle.js' %}" defer></script>
+
+{% endblock extra_scripts %}

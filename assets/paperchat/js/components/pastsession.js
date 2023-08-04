@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react"
 import { getNewSession, getRecentSessions } from "../Api";
 
-const PastSection = ({ session, handleSetSession, isSidebarOpen }) => {
+const PastSection = ({ session, handleSetSession, isSidebarOpen, chatstate }) => {
 
     const [pastSection, setPastSection] = useState([]);
     const [currentSection, setCurrentSection] = useState({})

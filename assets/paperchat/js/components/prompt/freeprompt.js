@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { sendSuperPrompt } from "../../Api";
 
-const FreePromptBuilder = ({ session, handlePrompt }) => {
+const FreePromptBuilder = ({ session, handlePrompt, chatstate }) => {
     const [formData, setFormData] = useState([])
     const handleChange = (event) => {
         const { name, value } = event.target;
@@ -23,7 +23,8 @@ const FreePromptBuilder = ({ session, handlePrompt }) => {
             prompt: formData.textInput,
             session: session.id,
             mode: "free",
-            selected: []
+            selected: [],
+            extra: {chattype: chatstate.name}
         }
         console.log(promptData)
         try {
