@@ -2,9 +2,9 @@
 FROM quay.io/minio/minio
 
 # Set environment variables for MinIO
-ENV MINIO_ROOT_USER=minio99
-ENV MINIO_ROOT_PASSWORD=minio123
-ENV MINIO_SERVER_URL="https://minio.qobbysam.com:9000"
+ENV MINIO_ROOT_USER=admin
+ENV MINIO_ROOT_PASSWORD=password
+#ENV MINIO_SERVER_URL="https://minio.qobbysam.com:9000"
 
 
 # Expose ports for MinIO service and console
