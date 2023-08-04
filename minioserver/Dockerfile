@@ -1,22 +1,13 @@
-# # Use a lightweight Linux base image
-# FROM alpine:latest
+# Use the official MinIO image from Quay.io as the base image
+FROM quay.io/minio/minio
 
-# Use the official Bitnami MinIO image as the base image
-FROM minio/minio:latest
+# Set environment variables for MinIO
+ENV MINIO_ROOT_USER=minio99
+ENV MINIO_ROOT_PASSWORD=minio123
 
-# Set environment variables for MinIO root user and password
-ENV MINIO_ROOT_USER="admin"
-ENV MINIO_ROOT_PASSWORD="password"
-#ENV MINIO_VOLUMES="/mnt/data"
-ENV MINIO_SERVER_URL="http://minio.qobbysam.com"
-
-#RUN mkdir -p /mnt/data
-
-# Expose the default MinIO port
+# Expose ports for MinIO service and console
 EXPOSE 9000
+EXPOSE 9001
 
-# Define the command to start the MinIO server
-#CMD [ "server",  "--console-address :9001" ,"/data"]
-CMD [ "server", "--console-address ':9005'",  "/data" ]
-
-
+# Define the command to run MinIO server with the specified options
+CMD ["server", "/data", "--console-address", ":9001"]
