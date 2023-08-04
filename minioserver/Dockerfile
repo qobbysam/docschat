@@ -17,6 +17,6 @@ EXPOSE 9000
 
 # Define the command to start the MinIO server
 #CMD [ "server",  "--console-address :9001" ,"/data"]
-CMD [ "minio server --console-address ':9001' /data" ]
+CMD [ "server", "--console-address ':9005'",  "/data" ]
 
 
