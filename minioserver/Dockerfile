@@ -16,6 +16,6 @@ ENV MINIO_SERVER_URL="http://minio.qobbysam.com"
 EXPOSE 9000
 
 # Define the command to start the MinIO server
-CMD ["minio", "server",  "--console-address :9001" ,"/data"]
+CMD [ "server",  "--console-address :9001" ,"/data"]
 
 
