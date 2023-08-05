@@ -6,11 +6,16 @@ from .base import *
 #env_path = BASE_DIR / ".production.env"
 
 
-DEBUG = os.environ.get("DEBUG")
+if os.environ.get("DEBUG").capitalize == 'TRUE':
+    DEBUG = True
+else:
+    DEBUG = False
 
 # ENV_ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS')
 
 ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '').split(',')
+
+CSRF_TRUSTED_ORIGINS = os.getenv('ALLOWED_HOSTS', '').split(',')
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
