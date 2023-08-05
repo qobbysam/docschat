@@ -19,5 +19,5 @@ python manage.py collectstatic --noinput
 
 
 # Start Gunicorn server with the appropriate number of workers
-gunicorn llmapp.asgi:application --bind 0.0.0.0:8000 --workers 4 -k uvicorn.workers.UvicornWorker
+gunicorn llmapp.asgi:application --bind 0.0.0.0:8000 --workers 2 -k uvicorn.workers.UvicornWorker
 

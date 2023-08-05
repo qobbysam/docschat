@@ -3,7 +3,7 @@
 
 # Use the official Python image as the base image
 
-FROM python:3.9
+FROM python:3.10
 
 RUN --mount=type=secret,id=_env,dst=/etc/secrets/.env cat /etc/secrets/.env
 
