@@ -76,21 +76,24 @@ const ActiveSection = ({ currentsession, refreshPast, handleSessionChangeNoRefre
                                     <i className="ti-menu"></i>
                                 </span>
                             </div>
-                            <div className="peer mR-20">
+                            {/* <div className="peer mR-20">
                                 <img src="https://randomuser.me/api/portraits/men/12.jpg" alt="" className="w-3r h-3r bdrs-50p" />
                             </div>
                             <div className="peer">
                                 <h6 className="lh-1 mB-0">John Doe</h6>
                                 <i className="fsz-sm lh-1">Typing...</i>
-                            </div>
+                            </div> */}
                         </div>
                         <div className="peers">
                             <div className="peer">
                                 <h6> Chatting with {chatstate.name} mode</h6>
                             </div>
-                            {/* <a className="peer td-n c-grey-900 cH-blue-500 fsz-md mR-30" title="">
-                                <i className="ti-video-camera"></i>
-                            </a>
+                             <div className="peer">
+                             <button type="button" className ="btn btn-info" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-title="Automatically generate a detailed scientific review from your uploaded papers. Our advanced algorithm and natural language processing analyze your papers' content to synthesize a comprehensive review highlighting key findings and insights. Seamlessly incorporate relevant images into the generated PDF to enhance the visual representation of your research. Additionally, our AI-powered system automatically generates accurate citations for the sources referenced in your papers, ensuring proper attribution and saving you time. Let us provide you with a high-quality scientific review in no time.">
+                                <i className="ti-info-alt"></i>
+                            </button>
+                            </div>
+                            {/*
                             <a href="" className="peer td-n c-grey-900 cH-blue-500 fsz-md mR-30" title="">
                                 <i className="ti-headphone"></i>
                             </a>

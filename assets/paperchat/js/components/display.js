@@ -17,7 +17,7 @@ const CurrentPrompt = ({ currentPrompt, textComplete }) => {
     }, [currentPrompt])
     return (
         <>
-            <div>Current Prompt</div>
+            <div></div>
             <CurrentElement cPrompt={cPrompt} textComplete={textComplete}/>
 
         </>
@@ -30,7 +30,7 @@ const PastPrompt = ({ pastPrompts }) => {
 
     return (
         <>
-            <div>Past Prompts</div>
+            <div></div>
 
             {pastPrompts && pastPrompts.map((obj, index) => (
                 <Fragment key={index}>

@@ -49,7 +49,11 @@ const PastSection = ({ session, handleSetSession, isSidebarOpen, chatstate }) =>
             <div className={`${isSidebarOpen ? 'open' : ''} peer bdR `} id="chat-sidebar">
                 <div className="layers h-100">
                     <div className="bdB layer w-100">
+                        <div className="m-2">
                         <button className="btn btn-success" onClick={handleNewSession}>New Session</button>
+
+                        </div>
+
 
                     </div>
 
@@ -63,7 +67,7 @@ const PastSection = ({ session, handleSetSession, isSidebarOpen, chatstate }) =>
                                 </div>
                                 <div className="peer peer-greed pL-20">
                                     <h6 className="mB-0 lh-1 fw-400">{obj.id}</h6>
-                                    <small className="lh-1 c-green-500">Online</small>
+                                    <small className="lh-1 c-green-500">{obj.mode}</small>
                                 </div>
                             </div>
                         ))}

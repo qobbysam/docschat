@@ -28,7 +28,8 @@ const SearchComponent = ({ setValues, handleLoading }) => {
         setSearchinput(event.target.value);
     };
     return (
-        <>
+            <div className="row">
+                <div className="col-lg-6 col-md-6">
             <form onSubmit={handleSubmit}>
                 <div className="d-flex justify-content-between">
                     <input className="form-control" type="text" value={searchinput} onChange={handleChange} />
@@ -36,7 +37,8 @@ const SearchComponent = ({ setValues, handleLoading }) => {
                 </div>
 
             </form>
-        </>
+            </div>
+            </div>
     )
 }
 
