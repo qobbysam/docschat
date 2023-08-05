@@ -93,7 +93,10 @@ EXPOSE 8000
 #CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
 
 COPY start.sh /app/start.sh
+COPY start_celery.sh /app/start_celery.sh
+
 RUN chmod +x /app/start.sh
+RUN chmod +x /app/start_celery.sh
 
 ENTRYPOINT ["/app/start.sh"]
 #CMD ["bash", "-c", "celery -A llmapp worker -l info & python manage.py runserver 0.0.0.0:8000"]

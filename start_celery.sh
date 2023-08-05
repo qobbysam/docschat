@@ -16,8 +16,7 @@ python manage.py migrate
 python manage.py collectstatic --noinput
 
 # Start Celery worker
+celery -A llmapp worker -l DEBUG  
 
 
-# Start Gunicorn server with the appropriate number of workers
-gunicorn llmapp.asgi:application --bind 0.0.0.0:8000 --workers 4 -k uvicorn.workers.UvicornWorker
 
