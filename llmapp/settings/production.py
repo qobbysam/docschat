@@ -15,7 +15,7 @@ else:
 
 ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '').split(',')
 
-#CSRF_TRUSTED_ORIGINS = os.getenv('ALLOWED_HOSTS', '').split(',')
+CSRF_TRUSTED_ORIGINS = os.getenv('ALLOWED_HOSTS', '').split(',')
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
