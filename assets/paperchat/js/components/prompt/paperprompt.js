@@ -13,7 +13,7 @@ const SearchComponent = ({ setValues, handleLoading }) => {
 
         try {
 
-           var  search_string = `title:${searchinput}`
+            var search_string = `title:${searchinput}`
             const res = await getTopics(search_string)
 
             console.log(res.data)
@@ -28,17 +28,17 @@ const SearchComponent = ({ setValues, handleLoading }) => {
         setSearchinput(event.target.value);
     };
     return (
-            <div className="row">
-                <div className="col-lg-6 col-md-6">
-            <form onSubmit={handleSubmit}>
-                <div className="d-flex justify-content-between">
-                    <input className="form-control" type="text" value={searchinput} onChange={handleChange} />
-                    <input type="submit" className="btn btn-primary" value="search" />
-                </div>
+        <div className="row">
+            <div className="col-lg-6 col-md-6">
+                <form onSubmit={handleSubmit}>
+                    <div className="d-flex justify-content-between">
+                        <input className="form-control" type="text" value={searchinput} onChange={handleChange} />
+                        <input type="submit" className="btn btn-primary" value="search" />
+                    </div>
 
-            </form>
+                </form>
             </div>
-            </div>
+        </div>
     )
 }
 
@@ -104,7 +104,7 @@ const PaperPromptBuilder = ({ session, handlePaperPrompt, selectedElements, cans
             session: session.id,
             mode: "paper",
             selected: selectedElements,
-            extra: {chattype: chatstate.name}
+            extra: { chattype: chatstate.name }
         }
         console.log(promptData)
         try {
@@ -193,7 +193,23 @@ const PaperPrompt = ({ session, handlePaperPrompt, chatstate }) => {
     // };
 
     const setup = async () => {
-        const params = ""
+        var params = ""
+        if (chatstate.name == "GENERAL") {
+            params = params
+        }
+
+        if (chatstate.name == "LAw") {
+            var pr = `pdf_type:${chatstate.name}`
+            params = pr
+        }
+
+        if (chatstate.name == "SCIENCE") {
+            var pr = `pdf_type:${chatstate.name}`
+
+            params = pr
+
+        }
+
         setLoading(true);
         try {
             const res = await getTopics(params);

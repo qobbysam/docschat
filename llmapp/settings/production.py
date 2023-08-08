@@ -9,13 +9,13 @@ from .base import *
 if os.environ.get("DEBUG").capitalize == 'TRUE':
     DEBUG = True
 else:
-    DEBUG = False
+    DEBUG = True
 
 # ENV_ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS')
 
 ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '').split(',')
 
-CSRF_TRUSTED_ORIGINS = os.getenv('ALLOWED_HOSTS', '').split(',')
+#CSRF_TRUSTED_ORIGINS = os.getenv('ALLOWED_HOSTS', '').split(',')
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 

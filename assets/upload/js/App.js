@@ -33,7 +33,7 @@ const TableRow = ({ data, openModal, handleDelete }) => {
                     <button className="btn btn-link" onClick={() => openModal(data.file)}>
                         <i className="bi bi-file-earmark-pdf"></i> View PDF
                     </button>
-                    <button class="btn btn-primary" onClick={() => handleDelete(data.id)}>Delete</button>
+                    <button className="btn btn-primary" onClick={() => handleDelete(data.id)}>Delete</button>
 
                 </td>
             </tr>
@@ -100,45 +100,45 @@ const PdfModal = ({ pdfUrl, closeModal, showModal }) => {
                     <div className="modal-body">
                         <div className="container">
 
-                       
-                        <div className="row">
-                            <div className="col">
-                                <Document
-                                    file={pdfUrl}
-                                    onLoadSuccess={onDocumentLoadSuccess}
-                                >
-                                    <Page pageNumber={pageNumber} />
-                                </Document>
+
+                            <div className="row">
+                                <div className="col">
+                                    <Document
+                                        file={pdfUrl}
+                                        onLoadSuccess={onDocumentLoadSuccess}
+                                    >
+                                        <Page pageNumber={pageNumber} />
+                                    </Document>
+                                </div>
+
+
                             </div>
-
-
-                        </div>
                         </div>
 
                         <div className="modal-footer">
-                                <div className="mT-30">
-                                    <div className="pagec">
-                                        Page {pageNumber || (numPages ? 1 : '--')} of {numPages || '--'}
-                                    </div>
-                                    <div className="buttonc">
-                                        <button
-                                            type="button"
-                                            disabled={pageNumber <= 1}
-                                            onClick={previousPage}
-                                            className="Pre"
+                            <div className="mT-30">
+                                <div className="pagec">
+                                    Page {pageNumber || (numPages ? 1 : '--')} of {numPages || '--'}
+                                </div>
+                                <div className="buttonc">
+                                    <button
+                                        type="button"
+                                        disabled={pageNumber <= 1}
+                                        onClick={previousPage}
+                                        className="Pre"
 
-                                        >
-                                            Previous
-                                        </button>
-                                        <button
-                                            type="button"
-                                            disabled={pageNumber >= numPages}
-                                            onClick={nextPage}
+                                    >
+                                        Previous
+                                    </button>
+                                    <button
+                                        type="button"
+                                        disabled={pageNumber >= numPages}
+                                        onClick={nextPage}
 
-                                        >
-                                            Next
-                                        </button>
-                                    </div>
+                                    >
+                                        Next
+                                    </button>
+                                </div>
                             </div>
                         </div>
 
@@ -233,43 +233,48 @@ const AnimationElement = ({ relevantInfo }) => {
     };
 
     return (
-        <div className="accordion" id="accordionPricing">
-            <div className="accordion-item">
-                <h2 className="accordion-header" id="headingOne">
-                    <button className="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                        View File Progres
-                    </button>
-                </h2>
-                <div id="collapseOne" className="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionPricing">
-                    <div className="accordion-body">
-                        {relevantInfo.map((info) => (
-                            <div key={info.fileid}>
-                                {info.status === 'processing' &&
-                                    <div>
-                                        <p> Name: {info.name} <span className="text-info">Status: {info.status}</span></p>
-                                        <div className="spinner-border" role="status">
-                                            <span className="sr-only">Loading...</span>
-                                        </div>
+        <div className="row">
+            <div className="col">
+
+
+                <div className="accordion" id="accordionPricing">
+                    <div className="accordion-item">
+                        <h2 className="accordion-header" id="headingOne">
+                            <button className="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                View File Progres
+                            </button>
+                        </h2>
+                        <div id="collapseOne" className="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionPricing">
+                            <div className="accordion-body">
+                                {relevantInfo.map((info) => (
+                                    <div key={info.fileid}>
+                                        {info.status === 'processing' &&
+                                            <div>
+                                                <p> Name: {info.name} <span className="text-info">Status: {info.status}</span></p>
+                                                <div className="spinner-border" role="status">
+                                                    <span className="sr-only">Loading...</span>
+                                                </div>
+                                            </div>
+
+                                        }
+
+                                        {info.status === 'complete' &&
+                                            <div>
+
+                                                <p> Name: {info.name} <span className="text-success">Status: {info.status}</span></p>
+
+                                            </div>
+
+                                        }
+
                                     </div>
-
-                                }
-
-                                {info.status === 'complete' &&
-                                    <div>
-
-                                        <p> Name: {info.name} <span className="text-success">Status: {info.status}</span></p>
-
-                                    </div>
-
-                                }
-
+                                ))}
                             </div>
-                        ))}
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-
 
     );
 };
@@ -342,14 +347,14 @@ const UploadsTable = () => {
     }
     return (
         <>
-            <div class="table-responsive">
-                <table class="table table-centered table-nowrap mb-0 table-sm rounded">
-                    <thead class="thead-light">
+            <div className="table-responsive">
+                <table className="table table-centered table-nowrap mb-0 table-sm rounded">
+                    <thead className="thead-light">
                         <tr>
-                            <th class="border-0 rounded-start">#</th>
-                            <th class="border-0">Title</th>
-                            <th class="border-0">Status</th>
-                            <th class="border-0">Action</th>
+                            <th className="border-0 rounded-start">#</th>
+                            <th className="border-0">Title</th>
+                            <th className="border-0">Status</th>
+                            <th className="border-0">Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -368,10 +373,10 @@ const UploadsTable = () => {
                 </table>
                 <PdfModal pdfUrl={pdfUrl} closeModal={closeModal} showModal={showModal} />
 
-                <div class="row justify-content-center ">
-                    <div class="col-12">
-                        <div class="pagination text-center">
-                            <span class="step-links">
+                <div className="row justify-content-center ">
+                    <div className="col-12">
+                        <div className="pagination text-center">
+                            <span className="step-links">
 
                                 {previousurl && (
                                     <>
@@ -488,33 +493,33 @@ const App = () => {
     return (
         <>
             <div className="row gap-20 masonry pos-r">
-                <div class="masonry-sizer col-md-8 col-lg-10"></div>
-                <div class="masonry-item col-md-8 col-lg-10">
-                    <div class="bgc-white p-20 bd">
-                        <h6 class="c-grey-900">Upload Form</h6>
-                        <div class="mT-30">
+                <div className="masonry-sizer col-md-8 col-lg-10"></div>
+                <div className="masonry-item col-md-8 col-lg-10">
+                    <div className="bgc-white p-20 bd">
+                        <h6 className="c-grey-900">Upload Form</h6>
+                        <div className="mT-30">
                             <UploadElement handleUpload={handleUpload} />
 
                         </div>
                     </div>
                 </div>
 
-                <div class="masonry-item col-md-6 col-lg-10">
-                    <div class="bgc-white p-20 bd">
-                        <div class="mT-30">
+                <div className="masonry-item col-md-6 col-lg-10">
+                    <div className="bgc-white p-20 bd">
+                        <div className="mT-30">
                             <div className="row justify-content-between">
 
-                                {uploadProgress > 0 && <p class="text-center my-2 text-success" id="statusText">Uploading... {uploadProgress.toFixed(2)}%</p>}
+                                {uploadProgress > 0 && <p className="text-center my-2 text-success" id="statusText">Uploading... {uploadProgress.toFixed(2)}%</p>}
                                 {showAnimation && <AnimationElement relevantInfo={relevantInfo} />}
-                                {showUploadError && <div>Error Uploading Files</div>}
+                                {showUploadError && <div className="col">Error Uploading Files</div>}
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="masonry-item col-md-6 col-lg-10">
-                    <div class="bgc-white p-20 bd">
-                        <div class="mT-30">
+                <div className="masonry-item col-md-6 col-lg-10">
+                    <div className="bgc-white p-20 bd">
+                        <div className="mT-30">
                             <UploadsTable />
 
                         </div>
