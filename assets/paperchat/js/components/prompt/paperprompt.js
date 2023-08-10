@@ -321,7 +321,7 @@ const PaperPrompt = ({ session, handlePaperPrompt, chatstate }) => {
 
                 <div className="row">
                     <div className="col">
-                        <PaperPromptBuilder session={session} handlePaperPrompt={handlePaperPrompt} selectedElements={selectedElements} cansend={cansend} />
+                        <PaperPromptBuilder session={session} handlePaperPrompt={handlePaperPrompt} selectedElements={selectedElements} cansend={cansend} chatstate={chatstate}/>
                     </div>
                 </div>
             </div>
